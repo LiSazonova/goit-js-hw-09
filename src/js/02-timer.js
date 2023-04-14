@@ -67,6 +67,7 @@ refs.minutesField.textContent = addLeadingZero(minutes);
 refs.secondsField.textContent = addLeadingZero(seconds);
 
     if (days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0) {
+    Notify.success('Time is over'); 
     textInput.removeAttribute('disabled');
   }
 }
