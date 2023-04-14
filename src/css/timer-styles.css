@@ -3,7 +3,7 @@ input[type="text"] {
     font-size: 16px;
 }
 
-button {
+.btn-timer-start {
     padding: 10px 20px;
     background-color: #4CAF50;
     color: white;
@@ -12,7 +12,7 @@ button {
     cursor: pointer;
 }
 
-button:disabled {
+.btn-timer-start:disabled {
     padding: 10px 20px;
         background-color: #F0F0F0;
         color: rgb(20, 20, 20);

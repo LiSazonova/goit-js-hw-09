@@ -53,6 +53,7 @@ refs.btnStart.setAttribute('disabled', true);
 function countDown() {
     disabledBtn();
     textInput.setAttribute('disabled', true);
+    Notify.success('Timer started');
 setInterval(() => {
 const timeDiff = flatpickrEL.selectedDates[0].getTime() - Date.now();
 const timeObj = convertMs(timeDiff);
