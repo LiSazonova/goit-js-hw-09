@@ -19,6 +19,7 @@ const textInput = document.querySelector('input#datetime-picker');
 const flatpickrEL = flatpickr(textInput, options);
 
 const timer = document.querySelector('.timer');
+let intervalId = null;
 
 const refs = {
 btnStart: document.querySelector('[data-start]'),
@@ -51,24 +52,25 @@ refs.btnStart.setAttribute('disabled', true);
 }
 
 function countDown() {
-    disabledBtn();
-    textInput.setAttribute('disabled', true);
-    Notify.success('Timer started');
-setInterval(() => {
-const timeDiff = flatpickrEL.selectedDates[0].getTime() - Date.now();
-const timeObj = convertMs(timeDiff);
-updateClockface(timeObj);
-}, 1000);
+  disabledBtn();
+  textInput.setAttribute('disabled', true);
+  Notify.success('Timer started');
+  intervalId = setInterval(() => {
+    const timeDiff = flatpickrEL.selectedDates[0].getTime() - Date.now();
+    const timeObj = convertMs(timeDiff);
+    updateClockface(timeObj);
+  }, 1000);
 }
 
 function updateClockface({ days, hours, minutes, seconds }) {
-refs.daysField.textContent = addLeadingZero(days);
-refs.hoursField.textContent = addLeadingZero(hours);
-refs.minutesField.textContent = addLeadingZero(minutes);
-refs.secondsField.textContent = addLeadingZero(seconds);
+  refs.daysField.textContent = addLeadingZero(days);
+  refs.hoursField.textContent = addLeadingZero(hours);
+  refs.minutesField.textContent = addLeadingZero(minutes);
+  refs.secondsField.textContent = addLeadingZero(seconds);
 
-    if (days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0) {
-    Notify.success('Time is over'); 
+  if (days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0) {
+    clearInterval(intervalId);
+    Notify.success('Time is over');
     textInput.removeAttribute('disabled');
   }
 }
